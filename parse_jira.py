@@ -171,6 +171,7 @@ def main(sprintType):
     ipy = Pod('Yixins boba kids')
     ipd = Pod('Dirty Bytes')
     ipv = Pod('Sketchy Pod')
+    ipc = Pod('Crypto Pod')
 
     issues = getIssuesFromBoard(boardId, sprintId)
     for issue in issues:
@@ -188,11 +189,14 @@ def main(sprintType):
                 ipv.trackIssue(issue)
             if label == 'IPD':
                 ipd.trackIssue(issue)
+            if label == 'IPC':
+                ipc.trackIssue(issue)
                 
     print(sprint['name'])
     ipy.printSummary()
     ipd.printSummary()
     ipv.printSummary()
+    ipc.printSummary()
 
     #print(len(issues))
     #print(json.dumps(issues[0], sort_keys=True, indent=4, separators=(",", ": ")))
