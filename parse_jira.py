@@ -103,12 +103,75 @@ def request(method, url):
     
     response = requests.request(
         "GET",
-        url,
+        url=url,
         headers=headers,
         auth=auth
     )
     
     return json.loads(response.text)
+
+
+def get(url):
+    creds = getCredentials()
+    auth = HTTPBasicAuth(creds["username"], creds["password"])
+    
+    headers = {
+        "Accept": "application/json"
+    }
+    
+    response = requests.request(
+        "GET",
+        url=url,
+        headers=headers,
+        auth=auth
+    )
+    
+    return json.loads(response.text)
+
+
+
+def post(url, data={}):
+    creds = getCredentials()
+    auth = HTTPBasicAuth(creds["username"], creds["password"])
+    
+    headers = {
+        "Accepts": "application/json",
+        "Content-Type": "application/json"
+    }
+    
+    response = requests.request(
+        method="POST",
+        url=url,
+        json=data,
+        headers=headers,
+        auth=auth
+    )
+
+    print(response)
+    
+    return json.loads(response.text)
+
+
+def delete(url):
+    creds = getCredentials()
+    auth = HTTPBasicAuth(creds["username"], creds["password"])
+    
+    headers = {
+        "Accepts": "application/json",
+        "Content-Type": "application/json"
+    }
+    
+    response = requests.request(
+        method="DELETE",
+        url=url,
+        headers=headers,
+        auth=auth
+    )
+
+    print(response)
+    
+    return json.loads(response.text)
+
 
 
 def getSprints(boardId):
