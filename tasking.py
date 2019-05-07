@@ -1,6 +1,7 @@
 import json
 import sys
-from parse_jira import get, delete, post, getSprints, saveCredentials
+from parse_jira import get, delete, post
+from parse_jira import getIssuesFromBoard, getSprints, saveCredentials
 
 
 def deleteIssue(key):
@@ -71,16 +72,28 @@ def handleTicket(parentKey, summaries):
 
 
 def handleSprint(sprintId, summaries):
+    boardId = '318'
     issueUpdates = []
     
-    # TODO get all IPY issues from the sprint
+    # get all IPY issues from the sprint
+    issues = filter(lambda i: 'labels' in i['fields'] and 'IPY' in i['fields']['labels'], getIssuesFromBoard(boardId=boardId, sprintId=sprintId))
 
-    # TODO for each issue, if the issue does not already have subtasks, create subtask json and append to issueUpdates array
+    '''
+    for issue in issues:
+        print(issue['key'])
+    '''
 
-    # TODO bulk create subtasks
-    # return post('https://sofiinc.atlassian.net/rest/api/2/issue/bulk', {'issueUpdates': issueUpdates})
     
-    print("Unsupported operation")
+
+    # for each issue, if the issue does not already have subtasks, create subtask json and append to issueUpdates array
+    for issue in issues:
+        if len(issue['fields']['subtasks']) == 0:
+            # if there are no subtasks
+            for summary in summaries:
+                issueUpdates.append(createSubtaskInput(issue['key'], summary))
+
+    # bulk create subtasks
+    return post('https://sofiinc.atlassian.net/rest/api/2/issue/bulk', {'issueUpdates': issueUpdates})
 
 
 if __name__ == '__main__':    

@@ -210,7 +210,7 @@ def getFutureSprint(boardId):
 
 
 def getIssuesFromBoard(boardId, sprintId):
-    url = 'https://sofiinc.atlassian.net/rest/agile/1.0/board/{0}/issue?maxResults=1000&fields=labels&fields=sprint&fields=status&fields=customfield_10004&fields=issuetype&jql=sprint%3D{1}'.format(boardId, sprintId)
+    url = 'https://sofiinc.atlassian.net/rest/agile/1.0/board/{0}/issue?maxResults=1000&fields=labels&fields=sprint&fields=status&fields=customfield_10004&fields=issuetype&fields=subtasks&jql=sprint%3D{1}'.format(boardId, sprintId)
     #url = 'https://sofiinc.atlassian.net/rest/agile/1.0/board/{0}/issue?maxResults=1000&jql=sprint%3D{1}'.format(boardId, sprintId)
     return request('GET', url)['issues']
 
