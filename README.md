@@ -36,6 +36,21 @@ python parse_jira.py active
 
 Easily create multiple subtasks for use with tasking.
 
+Create tasks for a single ticket:
+
 ```
 python tasking.py --ticket SOFI-1234 "Task 1" "Task 2" ...
+```
+
+To create the same task for every ticket in a sprint,
+first find the sprint id:
+
+```
+python tasking.py --list-sprints
+```
+
+Then use that sprint id in the following command:
+
+```
+python tasking.py --sprint {sprintId} "Developing" "Testing"
 ```
