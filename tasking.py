@@ -1,6 +1,6 @@
 import json
 import sys
-from parse_jira import get, delete, post, saveCredentials
+from parse_jira import get, delete, post, getSprints, saveCredentials
 
 
 def deleteIssue(key):
@@ -88,12 +88,12 @@ if __name__ == '__main__':
         if (sys.argv[1] == 'init'):
             saveCredentials(sys.argv[2], sys.argv[3])
             exit()
-'''
+    '''
     if len(sys.argv) == 3:
         if sys.argv[1] == '--delete':
             deleteIssue(sys.argv[2])
             exit()
-'''
+    '''
         
     if (len(sys.argv) > 3):
         
@@ -103,6 +103,11 @@ if __name__ == '__main__':
 
         if sys.argv[1] == '--sprint':
             handleSprint(sys.argv[2], sys.argv[3:])
+            exit()
+
+    if (len(sys.argv) == 2):
+        if sys.argv[1] == '--list-sprints':
+            getSprints()
             exit()
 
     

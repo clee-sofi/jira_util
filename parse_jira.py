@@ -174,7 +174,7 @@ def delete(url):
 
 
 
-def getSprints(boardId):
+def getSprints(boardId='318'):
     url = 'https://sofiinc.atlassian.net/rest/agile/1.0/board/{0}/sprint'.format(boardId)
     sprints = request('GET', url)['values']
 
