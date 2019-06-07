@@ -36,16 +36,13 @@ def createSubtaskInput(parentKey, summary):
     return {
         'fields': {
             'project': {
-                'key': 'SOFI'
+                'key': 'INV'
             },
             'issuetype': {
                 'name': 'Sub-task'
             },
             'parent': {
                 'key': parentKey
-            },
-            'customfield_12600': { # Product Team
-                'value': 'Invest'
             },
             'labels': [
                 'IPY' # pod label
