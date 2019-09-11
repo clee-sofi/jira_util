@@ -17,7 +17,7 @@ def getIssueId(key):
 
 
 def getCreateMeta():
-    url = 'https://sofiinc.atlassian.net/rest/api/2/issue/createmeta?projectKeys=SOFI&issuetypeNames=Sub-task&expand=projects.issuetypes.fields'
+    url = 'https://sofiinc.atlassian.net/rest/api/2/issue/createmeta?projectKeys=INV&issuetypeNames=Sub-task&expand=projects.issuetypes.fields'
     response = get(url)
 
     print(response)
@@ -47,9 +47,9 @@ def createSubtaskInput(parentKey, summary):
             'customfield_12600': { # Product Team
                 'value': 'Invest'
             },
-            'labels': [
-                'IPY' # pod label
-            ],
+            'customfield_15634': { # Pod
+                'value': 'IPY' 
+            },
             'summary': summary
         }
     }
@@ -96,7 +96,7 @@ def handleSprint(sprintId, summaries):
     return post('https://sofiinc.atlassian.net/rest/api/2/issue/bulk', {'issueUpdates': issueUpdates})
 
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     if (len(sys.argv) == 4):
         if (sys.argv[1] == 'init'):
             saveCredentials(sys.argv[2], sys.argv[3])
