@@ -44,9 +44,9 @@ def createSubtaskInput(parentKey, summary):
             'parent': {
                 'key': parentKey
             },
-            'customfield_12600': { # Product Team
-                'value': 'Invest'
-            },
+#            'customfield_12600': { # Product Team
+#                'value': 'Invest'
+#            },
             'customfield_15634': { # Pod
                 'value': 'IPY' 
             },
