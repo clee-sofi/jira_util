@@ -1,6 +1,6 @@
 import json
 import sys
-from parse_jira import get, delete, post
+from parse_jira import get, delete, post, getPod
 from parse_jira import getIssuesFromBoard, getSprints, saveCredentials
 
 
@@ -48,7 +48,7 @@ def createSubtaskInput(parentKey, summary):
 #                'value': 'Invest'
 #            },
             'customfield_15634': { # Pod
-                'value': 'IPY' 
+                'value': getPod()
             },
             'summary': summary
         }
