@@ -22,6 +22,13 @@ An API key can be generated here: https://confluence.atlassian.com/cloud/api-tok
 
 ```
 python parse_jira.py init [username] [api key]
+
+```
+
+## Set Pod to your pod ##
+If you don't set your pod it will default to IPY
+```
+python parse_jira.py setPod [podId]
 ```
 
 ## Burndown Snapshot ##

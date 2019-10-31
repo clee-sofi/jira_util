@@ -84,6 +84,29 @@ def saveCredentials(username, password):
     with open("creds.json", "w+") as f:
         json.dump(creds, f)
 
+def changePod(podId):
+    try:
+        with open("creds.json", "r") as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        print('You must configure credentails first!')
+    data['podId'] = podId
+    try: 
+        with open("creds.json", "w+") as w:
+            json.dump(data, w)
+    except: 
+        print('failed to update pod')
+
+def getPod():
+    try:
+        with open("creds.json", "r") as f:
+            settings = json.load(f)
+            try:
+                return settings['podId']
+            except KeyError:
+                return 'IPY'
+    except FileNotFoundError:
+        return 'IPY'
 
 def getCredentials():
     try:
@@ -174,7 +197,7 @@ def delete(url):
 
 
 
-def getSprints(boardId='318'):
+def getSprints(boardId='470'):
     url = 'https://sofiinc.atlassian.net/rest/agile/1.0/board/{0}/sprint'.format(boardId)
     sprints = request('GET', url)['values']
 
@@ -266,10 +289,12 @@ def main(sprintType):
 
 
 if __name__ == '__main__':
-    if (len(sys.argv) == 2):
+    if (len(sys.argv) > 1 and sys.argv[1] == 'setPod'):
+        changePod(sys.argv[2])
+    elif (len(sys.argv) == 2):
         main(sys.argv[1])
     elif (len(sys.argv) == 4):
         if (sys.argv[1] == 'init'):
             saveCredentials(sys.argv[2], sys.argv[3])
     else:
-        print('Usage: python3 parse_jira.py [active|future|list-sprints|{sprintId}] | init {username} {password}')
+        print('Usage: python3 parse_jira.py [active|future|list-sprints|{sprintId}] | init {username} {password} | setPod {podId}')
