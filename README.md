@@ -12,6 +12,11 @@ Documentation for the APIs used in these scripts:
 * python 3
 * requests module
 
+## Installing dependencies ##
+```
+pip3 install -r requirements.txt
+```
+
 # Overview of Functions #
 
 ## Initialization ##
